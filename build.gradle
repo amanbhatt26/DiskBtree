@@ -1,0 +1,30 @@
+plugins {
+    id 'application'
+}
+
+group = 'org.mydb'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar{
+    manifest{
+        attributes 'Main-Class':application.mainClass
+    }
+}
+
+application {
+    // Define the main class for the application.
+    mainClass = 'org.mydb.Main'
+}
