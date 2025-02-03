@@ -1,18 +1,16 @@
 package org.mydb.btree;
 
-public abstract class Page {
+import org.mydb.Utilities.Constants;
 
-    private int pageNumber;
-    private int pageSize;
+import java.nio.ByteBuffer;
 
-
-
-    abstract public byte[] byteLayout();
-    abstract public int getPageNumber();
-    abstract public int getPageSize();
-
-    public static Page createPage(byte[] byteLayout){
+public interface Page {
+    ByteBuffer byteLayout();
+    Overflow add(int val);
+    Constants.PageType getPageType();
+    int sizeLeft();
+    static Page fromByteLayout(ByteBuffer buffer){
+        /*TODO: return specific page types based on the bytebuffer */
         return null;
     }
-
 }

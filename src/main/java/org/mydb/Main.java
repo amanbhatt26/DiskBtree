@@ -1,6 +1,8 @@
 package org.mydb;
 
 import org.mydb.btree.LeafPage;
+import org.mydb.btree.Overflow;
+import org.mydb.btree.Page;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,11 +12,17 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        LeafPage page = new LeafPage(12);
+        Page page = new LeafPage(12);
 
-        page.insertKey(10);
-        page.insertKey(20);
-        page.insertKey(30);
+        Overflow of;
+        of = page.add(20);
+        of = page.add(10);
+        of = page.add(30);
+        of = page.add(31);
+        of = page.add(55);
+        of = page.add(99);
+        of = page.add(101);
+        of = page.add(102);
 
         ByteBuffer pageLayout = page.byteLayout();
 
@@ -46,6 +54,6 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        LeafPage newPage = LeafPage.createLeafPage(pageLayout);
+        LeafPage newPage = new LeafPage(pageLayout);
     }
 }
